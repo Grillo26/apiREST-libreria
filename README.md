@@ -32,27 +32,16 @@ Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clien
 
 ✅ Anotaciones como @RestController, @Service, @Repository, @Transactional, etc.  
 
-## 📄Modelos
+## 📄 Modelos
 
-### -Modelo de Cliente  
+-Clientes
 
-public class Cliente { 
+-Libros
 
-    private Long id; 
+-Reseñas
 
-    private String nombre;  
+## 🔗 Endpoints de la API
 
-    private String email; 
-
-    private String telefono; 
-
-    private String direccion; 
-
-    private LocalDate fechaRegistro;  
-
-}
-
-🔗 Endpoints de la API
 | Método | Ruta                 | Descripción                  |
 | ------ | -------------------- | ---------------------------- |
 | GET    | `/api/clientes`      | Listar todos los clientes    |
@@ -61,20 +50,7 @@ public class Cliente {
 | PUT    | `/api/clientes/{id}` | Actualizar cliente existente |
 | DELETE | `/api/clientes/{id}` | Eliminar cliente por ID      |
 
-## -Modelo Libro
 
-public class Libro{ 
-
-    private Long id; 
-
-    private String titulo;  
-
-    private String autor; 
-
-    private Integer paginas;  
-
-}
-🔗 Endpoints de la API  
 | Método | Ruta                 | Descripción                  |
 | ------ | -------------------- | ---------------------------- |
 | GET    | `/api/libros`      | Listar todos los libros    |
@@ -82,6 +58,15 @@ public class Libro{
 | POST   | `/api/libros`      | Registrar un nuevo libro   |
 | PUT    | `/api/libros/{id}` | Actualizar libro existente |
 | DELETE | `/api/libros/{id}` | Eliminar libro por ID      |
+
+
+| Método | Ruta                 | Descripción                  |
+| ------ | -------------------- | ---------------------------- |
+| GET    | `/api/resenas`      | Listar todos las reseñas    |
+| GET    | `/api/resenas/{id}` | Buscar reseña por ID        |
+| POST   | `/api/resenas`      | Registrar un nuevo reseña   |
+| PUT    | `/api/resenas/{id}` | Actualizar reseña existente |
+| DELETE | `/api/resenas/{id}` | Eliminar reseña por ID      |
 
 
 ## 🧪 Pruebas con Postman  
@@ -93,13 +78,9 @@ Aquí un ejemplo para crear un cliente:
 {  
 
   "nombre": "Juan Pérez",  
-
   "email": "juan@example.com",  
-
   "telefono": "555123456",  
-
   "direccion": "Av. Libertador 123", 
-
   "fechaRegistro": "2025-05-08"  
 }  
   
