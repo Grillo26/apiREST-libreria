@@ -1,6 +1,6 @@
-# 📚 **API REST - Gestión de Clientes para Librería**
+# 📚 **API REST - Gestión y Administración para Librería**
 
-Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clientes de una librería mediante una API RESTful con operaciones CRUD: crear, leer, actualizar y eliminar.  
+Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clientes, libros, autores, y todo lo referente a una librería mediante una API RESTful con operaciones CRUD: crear, leer, actualizar y eliminar.  
 
 ## 🛠 Tecnologías utilizadas
 
@@ -40,6 +40,8 @@ Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clien
 
 -Reseñas
 
+-Promociones
+
 ## 🔗 Endpoints de la API
 
 | Método | Ruta                 | Descripción                  |
@@ -58,6 +60,15 @@ Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clien
 | POST   | `/api/libros`      | Registrar un nuevo libro   |
 | PUT    | `/api/libros/{id}` | Actualizar libro existente |
 | DELETE | `/api/libros/{id}` | Eliminar libro por ID      |
+
+
+| Método | Ruta                 | Descripción                  |
+| ------ | -------------------- | ---------------------------- |
+| GET    | `/api/resenas`      | Listar todos las reseñas    |
+| GET    | `/api/resenas/{id}` | Buscar reseña por ID        |
+| POST   | `/api/resenas`      | Registrar un nuevo reseña   |
+| PUT    | `/api/resenas/{id}` | Actualizar reseña existente |
+| DELETE | `/api/resenas/{id}` | Eliminar reseña por ID      |
 
 
 | Método | Ruta                 | Descripción                  |
