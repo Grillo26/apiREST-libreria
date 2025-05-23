@@ -9,6 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="clientes")
@@ -18,13 +22,22 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "{NotBlank.clientes.nombre}")
     private String nombre;
-    private String email;
-    private Integer telefono;
-    private String direccion;
 
+    @NotBlank(message = "{NotBlank.clientes.email}")
+    private String email;
+
+    @NotNull(message = "{NotNull.clientes.telefono}")
+    @Min(value = 10, message = "{Min.clientes.telefono}")
+    private Integer telefono;
+
+    @NotBlank(message = "{NotBlank.clientes.direccion}")
+    @Size(min = 3, max = 100, message = "{Size.clientes.direccion}")
+    private String direccion;
     
     @Column(name= "fecha_registro")
+    @NotNull(message = "{NotNull.clientes.fechaRegistro}")
     private LocalDate fechaRegistro;
     
     public Cliente() {

@@ -7,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="promociones")
@@ -16,12 +19,27 @@ public class Promociones {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "{NotBlank.promociones.titulo}")
+    @Size(min = 3, max = 30, message = "{Size.promociones.titulo}")
     private String titulo;
+
+    @NotBlank(message = "{NotBlank.promociones.descripcion}")
+    @Size(min = 3, max = 50, message = "{Size.promociones.descripcion}")
     private String descripcion;
+
+    @NotBlank(message = "{NotBlank.promociones.codigo}")
     private String codigo;
+
+    @NotNull(message = "{NotNull.promociones.porcentaje}")
     private Double porcentaje;
+
+    @NotNull(message = "{NotNull.promociones.fecha_inicio}")
     private LocalDate fecha_inicio;
+
+    @NotNull(message = "{NotNull.promociones.fecha_fin}")
     private LocalDate fecha_fin;
+
+    @NotNull(message = "{NotNull.promociones.activa}")
     private Boolean activa;
 
     public Promociones() {
