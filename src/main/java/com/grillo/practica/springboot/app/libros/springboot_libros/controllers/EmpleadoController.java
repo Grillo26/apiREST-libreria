@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.naming.Binding;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,77 +17,76 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grillo.practica.springboot.app.libros.springboot_libros.entities.Resena;
-import com.grillo.practica.springboot.app.libros.springboot_libros.services.ResenaService;
+import com.grillo.practica.springboot.app.libros.springboot_libros.entities.Empleado;
+import com.grillo.practica.springboot.app.libros.springboot_libros.services.EmpleadoService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/resenas")
-public class ResenaController {
-
+@RequestMapping("/api/empleados")
+public class EmpleadoController {
     @Autowired
-    private ResenaService service;
+    private EmpleadoService service;
 
-    /*Mostrar Todo */
+    //<--Lista todo
     @GetMapping
-    public List<Resena> list(){
+    public List<Empleado> list(){
         return service.findAll();
     }
 
-    /*Mostrar por id */
+    //<--Buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<?> view(@PathVariable Long id){
-        Optional<Resena> resenaOptional = service.findById(id);
-        if(resenaOptional.isPresent()){
-            return ResponseEntity.ok(resenaOptional.orElseThrow());
+        Optional<Empleado> empleadoOptional = service.findById(id);
+        if(empleadoOptional.isPresent()){
+            return ResponseEntity.ok(empleadoOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+
     }
 
-    /*Crear */
+    //<--Crear
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody Resena resena, BindingResult result){
+    public ResponseEntity<?> create(@Valid Empleado empleado, @PathVariable Long id, BindingResult result){
         if(result.hasFieldErrors()){
             return validation(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(resena));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(empleado));
     }
 
-    /*Actualizar */
+    //<--Update
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Resena resena, @PathVariable Long id, BindingResult result){
+    public ResponseEntity<?> update(@Valid Empleado empleado, @PathVariable Long id, BindingResult result){
         if(result.hasFieldErrors()){
             return validation(result);
         }
-        Optional<Resena> resenaOptional = service.update(id, resena);
-        if(resenaOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.CREATED).body(resenaOptional.orElseThrow());
+        Optional<Empleado> empleadoOptional = service.update(id, empleado);
+        if(empleadoOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(empleadoOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }
 
-    
-    /*Eliminar */
+    //<--Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Resena> delete(@PathVariable Long id){
-        Optional<Resena> resenaOptional = service.delete(id);
-        if(resenaOptional.isPresent()){
-            return ResponseEntity.ok(resenaOptional.orElseThrow());
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        Optional<Empleado> empleadoOptional = service.delete(id);
+        if ((empleadoOptional.isPresent())) {
+            return ResponseEntity.ok(empleadoOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
     }
-    
+
+    //<--Validacion y configurar mensaje de error personalizado
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(err->{
-            errors.put(err.getField(), "El campo "+ err.getField()+ " " + err.getDefaultMessage());
+        result.getFieldErrors().forEach(err ->{
+            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
         });
         return ResponseEntity.badRequest().body(errors);
-
     }
+
 }

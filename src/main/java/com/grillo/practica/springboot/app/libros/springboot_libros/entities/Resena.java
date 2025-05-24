@@ -7,6 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="resenas")
@@ -15,10 +19,21 @@ public class Resena {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "{NotBlank.resenas.titulo_libro}")
     private String titulo_libro;
+
+    @NotBlank(message = "{NotBlank.resenas.nombre_usuario}")
     private String nombre_usuario;
+
+    @NotBlank(message = "{NotBlank.resenas.comentario}")
     private String comentario;
+
+    @NotNull(message = "{NotNull.resenas.calificacion}")
+    @Min(value = 0, message = "{Min.resenas.calificacion}")
+    @Max(value = 20, message = "{Max.resenas.calificacion}")
     private Integer calificacion;
+
+    @NotNull(message = "{NotNull.resenas.fecha_resena}")
     private LocalDate fecha_resena;
     
     public Resena() {
