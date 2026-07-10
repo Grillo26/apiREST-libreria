@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS clientes (
                                         nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     telefono VARCHAR(20),
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_eliminado BOOLEAN DEFAULT FALSE
     );
 
 -- Tabla: autores

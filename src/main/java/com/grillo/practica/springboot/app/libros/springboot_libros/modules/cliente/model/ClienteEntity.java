@@ -2,6 +2,7 @@ package com.grillo.practica.springboot.app.libros.springboot_libros.modules.clie
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +26,7 @@ public class ClienteEntity {
     @Column(length = 100, unique = true, nullable = false)
     private String email = "no ingresado";
 
-    @Column(length = 200)
+    @Column(length = 20)
     private String telefono;
 
     @Column(name = "fecha_registro")
@@ -35,5 +36,9 @@ public class ClienteEntity {
     protected void onCreate(){
         fechaRegistro = LocalDateTime.now();
     }
+
+    @Builder.Default
+    @Column(name = "is_eliminado")
+    private boolean eliminado = false;
 
 }

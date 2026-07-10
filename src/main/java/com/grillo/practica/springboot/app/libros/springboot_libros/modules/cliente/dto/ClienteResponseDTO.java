@@ -11,6 +11,4 @@ public class ClienteResponseDTO {
     private Long id;
     private String nombre;
     private String email;
-    private String telefono;
-    private LocalDateTime fechaRegistro;
 }
