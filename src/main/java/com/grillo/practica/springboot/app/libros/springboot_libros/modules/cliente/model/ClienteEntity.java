@@ -2,7 +2,7 @@ package com.grillo.practica.springboot.app.libros.springboot_libros.modules.clie
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLRestriction("is_eliminado = false") // Para solo traer los clientes NO borrados
 @Table(name = "clientes")
 public class ClienteEntity {
 

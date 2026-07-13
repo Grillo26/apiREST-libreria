@@ -8,15 +8,30 @@ import com.grillo.practica.springboot.app.libros.springboot_libros.modules.clien
 import com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.repository.ClienteRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+
+    /*  =========== CRUD MOSTRAR =============*/
+    @Transactional
+    public Page<ClienteResponseDTO> listarClientes(Pageable pageable){
+        // Obtenemos de la base de datos
+        Page<ClienteEntity> clientes = clienteRepository.findAll(pageable);
+
+        // Convertimos cada Entity a DTO
+        return clientes.map( clienteEntity -> new ClienteResponseDTO(
+                clienteEntity.getId(),
+                clienteEntity.getEmail(),
+                clienteEntity.getTelefono()
+        ));
+    }
+
 
     /*  =========== CRUD CREATE ==============*/
     @Transactional
