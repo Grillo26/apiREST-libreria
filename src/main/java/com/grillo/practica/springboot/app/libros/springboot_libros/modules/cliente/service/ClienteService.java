@@ -52,6 +52,7 @@ public class ClienteService {
         ClienteEntity clienteGuardado = clienteRepository.save(cliente);
 
         return ClienteResponseDTO.builder()
+                .id(clienteGuardado.getId())
                 .nombre(clienteGuardado.getNombre())
                 .email(clienteGuardado.getEmail())
                 .build();
