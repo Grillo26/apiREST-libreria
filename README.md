@@ -4,7 +4,7 @@ Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clien
 
 ## 🛠 Tecnologías utilizadas
 
--Java 17+  
+- Java 17+  
 
 -Spring Boot 
 
@@ -15,6 +15,10 @@ Proyecto backend desarrollado con Java + Spring Boot que permite gestionar clien
 -Postman (para pruebas de la API)  
 
 -Maven  
+
+## 📊 Base de Datos
+
+![Esquema de la base de datos](public/img/bd_libros.jpg)
 
 ## 🚀 Funcionalidades  
 
