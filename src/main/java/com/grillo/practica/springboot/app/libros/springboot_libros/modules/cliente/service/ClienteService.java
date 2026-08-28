@@ -2,6 +2,7 @@ package com.grillo.practica.springboot.app.libros.springboot_libros.modules.clie
 
 import com.grillo.practica.springboot.app.libros.springboot_libros.common.dto.ConflictException;
 import com.grillo.practica.springboot.app.libros.springboot_libros.common.dto.ResourceNotFoundException;
+import com.grillo.practica.springboot.app.libros.springboot_libros.modules.alquileres.dto.AlquilerResponseDTO;
 import com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.dto.ClienteRequestDTO;
 import com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.dto.ClienteResponseDTO;
 import com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.model.ClienteEntity;
@@ -24,12 +25,14 @@ public class ClienteService {
         // Obtenemos de la base de datos
         Page<ClienteEntity> clientes = clienteRepository.findAll(pageable);
 
-        // Convertimos cada Entity a DTO
+        /* onvertimos cada Entity a DTO
         return clientes.map( clienteEntity -> new ClienteResponseDTO(
                 clienteEntity.getId(),
                 clienteEntity.getEmail(),
                 clienteEntity.getTelefono()
-        ));
+        )); */
+
+        return clientes.map(ClienteResponseDTO::fromEntity);
     }
 
 

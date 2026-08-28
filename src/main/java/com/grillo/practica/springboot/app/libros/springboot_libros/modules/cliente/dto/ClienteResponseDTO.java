@@ -1,18 +1,29 @@
 package com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.dto;
 
-import lombok.AllArgsConstructor;
+import com.grillo.practica.springboot.app.libros.springboot_libros.modules.cliente.model.ClienteEntity;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ClienteResponseDTO {
-    private Long id;
-    private String nombre;
-    private String email;
+public record ClienteResponseDTO(
+        Long id,
+        String nombre,
+        String email,
+        String telefono,
+        LocalDateTime fechaRegistro
+
+) {
+    public static ClienteResponseDTO fromEntity(ClienteEntity entity){
+        if(entity == null) return null;
+
+        return ClienteResponseDTO.builder()
+                .id(entity.getId())
+                .nombre(entity.getNombre())
+                .email(entity.getEmail())
+                .telefono(entity.getTelefono())
+                .fechaRegistro(entity.getFechaRegistro())
+                .build();
+    }
 }
