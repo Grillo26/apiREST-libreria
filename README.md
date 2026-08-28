@@ -99,6 +99,10 @@ Aquí un ejemplo para crear un cliente:
   "fechaRegistro": "2025-05-08"  
 }  
   
+## 📄 Documentación
+
+Para ver la documentación completa del Sistema de Gestión Bibliotecaria, haz clic [aquí](public/M1-1%20Sistema_de_GestionBibliotecaria.md).
+
 ## 📌 Autor 
 
 Desarrollado por Carlos Enrique Mamani Torrez  

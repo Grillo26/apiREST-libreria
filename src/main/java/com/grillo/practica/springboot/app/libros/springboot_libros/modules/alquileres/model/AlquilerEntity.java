@@ -5,7 +5,7 @@ import com.grillo.practica.springboot.app.libros.springboot_libros.modules.clien
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,13 +33,13 @@ public class AlquilerEntity {
     private BookEntity libro;
 
     @Column(name = "fecha_alquiler", nullable = false)
-    private Date fechaAlquiler;
+    private LocalDate fechaAlquiler;
 
     @Column(name = "fecha_devolucion_prevista", nullable = false)
-    private Date fechaDevolucionPrevista;
+    private LocalDate fechaDevolucionPrevista;
 
     @Column(name = "fecha_devolucion_real")
-    private Date fechaDevolucionReal;
+    private LocalDate fechaDevolucionReal;
 
     @Column(name = "estado", length = 20)
     @Builder.Default
