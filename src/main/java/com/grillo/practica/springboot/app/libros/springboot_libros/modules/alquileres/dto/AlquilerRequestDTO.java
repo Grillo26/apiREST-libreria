@@ -15,5 +15,6 @@ public record AlquilerRequestDTO(
         @NotNull(message = "La fecha de devolución prevista es requerida")
         @Future(message = "La fecha de devolución debe ser una fecha futura")
         LocalDate fechaDevolucionPrevista
+
 ) {
 }

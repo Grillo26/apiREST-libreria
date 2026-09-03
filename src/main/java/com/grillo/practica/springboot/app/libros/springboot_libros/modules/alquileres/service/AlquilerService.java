@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -65,8 +66,39 @@ public class AlquilerService {
                 .build();
         AlquilerEntity alquilerGuardado = alquileresRepository.save(alquiler);
 
-        // 4.- Retornamos el response
+        // 4.- Retornamos él response
         return AlquilerResponseDTO.fromEntity(alquilerGuardado);
     }
+
+
+    // Registrar Devolución RF-011
+    @Transactional
+    public AlquilerResponseDTO registrarDevolucion(Long id){
+
+        // 1.- Verificamos si existe el alquiler y su estado
+        AlquilerEntity alquiler = alquileresRepository.findById(id)
+                .orElseThrow( () -> new ResourceNotFoundException("Alquiler no encontrado con el id:" + id));
+        if("devuelto".equalsIgnoreCase(alquiler.getEstado())){
+            throw new IllegalArgumentException("Este alquiler ya fue marcado como devuelto");
+        }
+
+        // 2.- Asignamos la fecha de devolucion real
+        alquiler.setFechaDevolucionReal(LocalDate.now());
+
+        // 3.- Primero Busca el libro y luego ejemplares_disponibles incrementamos (RN-003)
+        BookEntity book = alquiler.getLibro();
+        book.setEjemplaresDisponibles(book.getEjemplaresDisponibles()+1);
+        bookRepository.save(book);
+
+        // 4.- El estado debe pasar ha devuelto (RN-004)
+        alquiler.setEstado("devuelto");
+
+        // 5.- Guardamos en la base de datos
+        AlquilerEntity devolucionAlquiler = alquileresRepository.save(alquiler);
+
+        return AlquilerResponseDTO.fromEntity(devolucionAlquiler);
+    }
+
+    // Editar alquiler (Solo SuperAdmin)
 
 }
